@@ -1,0 +1,65 @@
+// app global css in SCSS form
+* {
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  outline: 0px;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-family: "Poppins";
+  background-color: transparent;
+
+  p {
+    margin: 0px;
+  }
+
+  svg[fill="none"] {
+    * {
+      stroke: inherit;
+      stroke-width: inherit;
+    }
+  }
+}
+
+*:focus {
+  outline: 0px;
+  border: 0px;
+}
+
+*:active {
+  outline: 0px;
+  border: 0px;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+body {
+  background-image: url("/images/dark-background.png");
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  background-attachment: fixed;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+a:active {
+  opacity: 0.8;
+}
+
+img {
+  object-fit: cover;
+}

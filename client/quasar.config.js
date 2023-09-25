@@ -12,9 +12,6 @@ const { configure } = require("quasar/wrappers");
 
 module.exports = configure(function (/* ctx */) {
   return {
-    htmlVariables: {
-      productName: "Gallery",
-    },
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
 

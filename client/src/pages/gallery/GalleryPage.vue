@@ -2,6 +2,7 @@
 import axios from "axios";
 import { ref } from "vue";
 import { nanoid } from "nanoid";
+import { functions } from "boot/functions";
 import { auth, storage } from "boot/firebase";
 import { useAuth } from "@vueuse/firebase";
 import Sparkles from "components/emojis/Sparkles.vue";
@@ -45,40 +46,18 @@ async function getStoredImages() {
 async function onImageField(ev) {
   uploading.value = true;
 
-  const uploadPromises = [];
-
   for (const image of ev.images) {
-    const formData = new FormData();
+    await functions.uploadImage(image.blob).then(async (response) => {
+      const bucketImage = storageRef(storage, response.data.image.path);
 
-    formData.set("image", image.blob);
-
-    const p = axios
-      .post(
-        "http://127.0.0.1:5001/project-1-74491/us-central1/app/image",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${await user.value.getIdToken()}`,
-          },
-        }
-      )
-      .then(async (response) => {
-        const bucketImage = storageRef(storage, response.data.image.path);
-
-        images.value.unshift({
-          id: bucketImage.name.split(".")[0],
-          src: await getDownloadURL(bucketImage),
-          ref: bucketImage,
-        });
+      images.value.unshift({
+        id: bucketImage.name.split(".")[0],
+        src: await getDownloadURL(bucketImage),
+        ref: bucketImage,
       });
-
-    uploadPromises.push(p);
+    });
   }
-
-  Promise.all(uploadPromises).finally(() => {
-    uploading.value = false;
-  });
+  uploading.value = false;
 }
 
 async function deleteImage(delImage) {

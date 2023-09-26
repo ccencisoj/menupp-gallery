@@ -99,6 +99,7 @@ function deleteImage(imageId) {
     style="display: none"
     type="file"
     ref="fileInput"
+    accept="image/*"
     :multiple="props.multiple"
     @change="changedFileInput"
   />

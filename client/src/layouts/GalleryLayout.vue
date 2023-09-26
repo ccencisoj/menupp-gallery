@@ -32,7 +32,7 @@ const { user } = useAuth(auth);
           <template #content>
             <div class="menu">
               <ButtonGroup>
-                <Button secondary="" fullWidth @click="signOut(auth)"
+                <Button secondary fullWidth @click="signOut(auth)"
                   >Cerrar sesión</Button
                 >
                 <Button color="#f00" fullWidth @click="deleteUser(user)"

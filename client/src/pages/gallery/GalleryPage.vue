@@ -232,27 +232,10 @@ async function deleteImage(delImage) {
       .header {
         .title-container {
           .title {
-            font-size: 20px;
+            font-size: 22px;
           }
           .emoji {
-            width: 20px;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media Only screen And (max-width: 420px) {
-  .page {
-    .container {
-      .header {
-        .title-container {
-          .title {
-            font-size: 18px;
-          }
-          .emoji {
-            width: 18px;
+            width: 22px;
           }
         }
       }

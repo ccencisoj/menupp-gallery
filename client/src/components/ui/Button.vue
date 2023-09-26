@@ -14,7 +14,7 @@ const emits = defineEmits(["click"]);
 <template>
   <button
     class="button"
-    :style="{ backgroundColor: props.color }"
+    :style="{ '--color': props.color }"
     :disabled="props.disabled"
     :class="{
       secondary: props.secondary,
@@ -38,6 +38,7 @@ const emits = defineEmits(["click"]);
 
 <style scoped lang="scss">
 .button {
+  --color: #{$primary};
   width: max-content;
   height: 56px;
   display: flex;
@@ -47,7 +48,7 @@ const emits = defineEmits(["click"]);
   align-items: center;
   flex-direction: row;
   justify-content: center;
-  background-color: $primary;
+  background-color: var(--color);
 
   .spinner {
     margin-right: 4px;
@@ -61,15 +62,11 @@ const emits = defineEmits(["click"]);
 }
 
 .button:active {
-  background-color: $primary-active;
+  filter: brightness(80%);
 }
 
 .secondary {
-  background-color: #4f354c;
-}
-
-.secondary:active {
-  background-color: #{darken(#4f354c, 2%)};
+  --color: #4f354c;
 }
 
 .disabled {

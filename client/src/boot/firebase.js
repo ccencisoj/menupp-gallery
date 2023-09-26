@@ -18,9 +18,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
 const storage = getStorage(app);
-
 const auth = getAuth(app);
 
 const providers = {
@@ -28,7 +26,9 @@ const providers = {
   facebook: new FacebookAuthProvider(),
 };
 
-connectAuthEmulator(auth, "http://127.0.0.1:9099", { disableWarnings: true });
-connectStorageEmulator(storage, "127.0.0.1", 9199);
+if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099", { disableWarnings: true });
+  connectStorageEmulator(storage, "127.0.0.1", 9199);
+}
 
 export { app, storage, auth, providers };

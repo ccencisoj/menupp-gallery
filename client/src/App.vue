@@ -33,6 +33,7 @@ onMounted(() => {
   width: 100vw;
   height: 100vh;
   display: flex;
+  z-index: 10000;
   position: fixed;
   align-items: center;
   visibility: visible;

@@ -1,10 +1,13 @@
 import axios from "axios";
 import { auth } from "boot/firebase";
 
-console.log("functions: ", process.env.FUNCTIONS_BASE_URL);
+console.log("Env: ", process.env.NODE_ENV);
 
 const http = axios.create({
-  baseURL: process.env.FUNCTIONS_BASE_URL,
+  baseURL:
+    process.env.NODE_ENV === "production"
+      ? "https://app-sxz35o4oaa-uc.a.run.app"
+      : "http://127.0.0.1:5001/project-1-74491/us-central1/app",
 });
 
 const functions = {

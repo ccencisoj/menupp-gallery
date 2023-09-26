@@ -1,6 +1,8 @@
 import axios from "axios";
 import { auth } from "boot/firebase";
 
+console.log("functions: ", process.env.FUNCTIONS_BASE_URL);
+
 const http = axios.create({
   baseURL: process.env.FUNCTIONS_BASE_URL,
 });

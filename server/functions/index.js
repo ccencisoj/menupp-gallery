@@ -2,12 +2,12 @@ const express = require("express");
 const busboy = require("busboy");
 const admin = require("firebase-admin");
 const sharp = require("sharp");
-const cors = require("cors");
-const { v4: uuidv4 } = require("uuid");
 const { onRequest } = require("firebase-functions/v2/https");
 const { AuthException } = require("./exceptions/AuthException");
 const { DataException } = require("./exceptions/DataException");
 const { BaseException } = require("./exceptions/BaseException");
+
+const isProduction = process.env.NODE_ENV === "production";
 
 admin.initializeApp();
 
@@ -16,8 +16,6 @@ const storage = admin.storage();
 const bucket = storage.bucket();
 
 const app = express();
-
-app.use(cors());
 
 const getUserFromRequest = async (req) => {
   const authorization = req.headers.authorization;
@@ -104,7 +102,7 @@ app.post("/image", async (req, res) => {
 
     const id = "image-" + Date.now();
     const name = `${id}.png`;
-    const path = `/users/${user.uid}/images/${name}`;
+    const path = `users/${user.uid}/images/${name}`;
     const bucketRef = bucket.file(path);
 
     sharp(image)
@@ -134,7 +132,7 @@ app.post("/profileImage", async (req, res) => {
       throw new DataException("'image' field required");
     }
 
-    const bucketRef = bucket.file(`/users/${user.uid}/profile/image.png`);
+    const bucketRef = bucket.file(`users/${user.uid}/profile/image.png`);
     sharp(image)
       .png()
       .pipe(bucketRef.createWriteStream())
@@ -146,4 +144,10 @@ app.post("/profileImage", async (req, res) => {
   }
 });
 
-exports.app = onRequest(app);
+exports.app = onRequest(
+  {
+    region: "us-central1",
+    cors: isProduction ? ["https://menupp-gallery.vercel.app"] : true,
+  },
+  app
+);

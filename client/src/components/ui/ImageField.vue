@@ -20,6 +20,10 @@ const props = defineProps({
     type: [String, Number],
     default: 3,
   },
+  height: {
+    type: String,
+    default: "max-content",
+  },
 });
 
 const emits = defineEmits(["changeImages"]);
@@ -56,6 +60,7 @@ function deleteImage(imageId) {
   <div
     class="image-field"
     v-if="images.length === 0 || !props.showGrid"
+    :style="{ height: props.height }"
     @click="fileInput.click()"
   >
     <Plus class="icon" />
@@ -102,7 +107,7 @@ function deleteImage(imageId) {
 <style scoped lang="scss">
 .image-field {
   width: 100%;
-  height: 20vh;
+  aspect-ratio: 1/1;
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -138,12 +143,13 @@ function deleteImage(imageId) {
   gap: 12px;
   width: 100%;
   display: grid;
+  aspect-ratio: 1/1;
   grid-template-columns: repeat(4, 1fr);
 
   .image-card {
     width: 100%;
+    height: 100%;
     display: flex;
-    aspect-ratio: 1/1;
     position: relative;
     align-items: center;
     border-radius: 12px;
@@ -151,7 +157,7 @@ function deleteImage(imageId) {
 
     .image-container {
       width: 100%;
-      height: 100%;
+      min-height: 100%;
       display: flex;
       overflow: hidden;
       position: relative;
@@ -165,10 +171,11 @@ function deleteImage(imageId) {
         filter: brightness(20%);
       }
       .image {
-        width: 90%;
-        height: 90%;
+        width: 80%;
+        height: 80%;
         position: absolute;
       }
+      height: 20vh;
 
       .expand {
         width: 100%;

@@ -1,6 +1,7 @@
 <script setup>
 const props = defineProps({
   type: String,
+  color: String,
   secondary: Boolean,
   disabled: Boolean,
   showLoading: Boolean,
@@ -13,6 +14,7 @@ const emits = defineEmits(["click"]);
 <template>
   <button
     class="button"
+    :style="{ backgroundColor: props.color }"
     :disabled="props.disabled"
     :class="{
       secondary: props.secondary,

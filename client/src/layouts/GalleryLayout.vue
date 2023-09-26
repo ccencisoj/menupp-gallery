@@ -1,15 +1,14 @@
 <script setup>
-import { ref } from "vue";
 import { auth } from "boot/firebase";
-import { signOut } from "firebase/auth";
+import { deleteUser, signOut } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { useAuth } from "@vueuse/firebase";
 import Dropdown from "components/ui/Dropdown.vue";
 import Button from "components/ui/Button.vue";
+import ButtonGroup from "src/components/ui/ButtonGroup.vue";
 
 const router = useRouter();
 const { user } = useAuth(auth);
-const showSettingsModal = ref(true);
 </script>
 
 <template>
@@ -32,7 +31,14 @@ const showSettingsModal = ref(true);
           </template>
           <template #content>
             <div class="menu">
-              <Button fullWidth @click="signOut(auth)">Cerrar sesión</Button>
+              <ButtonGroup>
+                <Button secondary="" fullWidth @click="signOut(auth)"
+                  >Cerrar sesión</Button
+                >
+                <Button color="#f00" fullWidth @click="deleteUser(user)"
+                  >Eliminar cuenta</Button
+                >
+              </ButtonGroup>
             </div>
           </template>
         </Dropdown>

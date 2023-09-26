@@ -83,6 +83,7 @@ async function deleteImage(delImage) {
         </div>
         <ImageField
           multiple
+          height="20vh"
           :show-grid="false"
           label="Subir imagenes"
           @changeImages="onImageField"
@@ -92,6 +93,7 @@ async function deleteImage(delImage) {
         <div class="image-list">
           <ImageCard
             v-for="image in images"
+            :key="image.id"
             :image="image"
             @delete="deleteImage(image)"
           />

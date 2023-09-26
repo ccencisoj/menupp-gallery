@@ -76,7 +76,7 @@ const router = useRouter();
   .header {
     .auth-options {
       .auth-option {
-        font-size: 85%;
+        font-size: 90%;
       }
     }
   }

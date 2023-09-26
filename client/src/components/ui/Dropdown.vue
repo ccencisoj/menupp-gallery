@@ -10,7 +10,7 @@ onMounted(() => {
   });
 
   document.addEventListener("click", (ev) => {
-    if (!dropdown.value.contains(ev.target)) {
+    if (!dropdown.value?.contains(ev.target)) {
       showContent.value = false;
     }
   });

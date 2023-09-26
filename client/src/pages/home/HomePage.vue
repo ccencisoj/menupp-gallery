@@ -75,6 +75,7 @@ const { width } = useWindowSize();
 
     .gallery-screen {
       width: 90%;
+      max-width: 1500px;
       border-radius: 24px;
       // box-shadow: 0px -32px 64px rgba(255, 255, 255, 0.05),
       //   0px 32px 64px rgba(255, 255, 255, 0.05);

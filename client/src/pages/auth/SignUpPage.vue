@@ -31,6 +31,7 @@ import FormImageField from "src/components/auth/FormImageField.vue";
 import { emailScheme, nameScheme, passwordScheme } from "src/schemes";
 import { useForm } from "src/hooks/useForm";
 import * as yup from "yup";
+import { functions } from "src/boot/functions";
 
 const { user } = useAuth(auth);
 const router = useRouter();
@@ -52,7 +53,7 @@ const form = useForm({
   validationScheme: yup.object({
     name: nameScheme,
     email: emailScheme.test(
-      "Verificar si existe un usuario",
+      "Verificar si existe un usuario con el correo",
       "Ya existe una cuenta con este correo",
       () => {
         emailScheme
@@ -82,30 +83,6 @@ watch(profileImage, () => {
   if (profileImage != null) form.errors.profileImage = "";
 });
 
-async function uploadProfileImage(user, profileImageBlob) {
-  const formData = new FormData();
-
-  formData.set("image", profileImageBlob);
-
-  await axios.post(
-    "http://127.0.0.1:5001/project-1-74491/us-central1/app/profileImage",
-    formData,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${await user.getIdToken()}`,
-      },
-    }
-  );
-
-  const storedImage = storageRef(
-    storage,
-    `/users/${user.uid}/profile/image.png`
-  );
-
-  return getDownloadURL(storedImage);
-}
-
 async function signUp() {
   const errors = form.check();
 
@@ -126,9 +103,10 @@ async function signUp() {
 
   createUserWithEmailAndPassword(auth, form.values.email, form.values.password)
     .then(async ({ user }) => {
-      const profileImageURL = await uploadProfileImage(
-        user,
-        profileImage.value.blob
+      await functions.setProfileImage(profileImage.value.blob);
+
+      const profileImageURL = await getDownloadURL(
+        storageRef(storage, `users/${user.uid}/profile/image.png`)
       );
 
       await updateProfile(user, {

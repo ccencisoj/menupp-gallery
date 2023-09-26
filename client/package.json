@@ -7,6 +7,7 @@
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
+    "start": "quasar build && quasar serve dist/spa --history",
     "build": "quasar build",
     "cypress:open": "cypress open"
   },

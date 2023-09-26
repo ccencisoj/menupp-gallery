@@ -1,8 +1,6 @@
 import axios from "axios";
 import { auth } from "boot/firebase";
 
-console.log("Env: ", process.env.NODE_ENV);
-
 const http = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"

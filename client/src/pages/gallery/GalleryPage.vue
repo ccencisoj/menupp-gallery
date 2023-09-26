@@ -74,7 +74,7 @@ async function deleteImage(delImage) {
           <p class="title">
             {{
               user && user.displayName
-                ? `Bienvenido, ${user.displayName}`
+                ? `Bienvenido, ${user.displayName.split(" ")[0]}`
                 : "Bienvenido"
             }}
           </p>

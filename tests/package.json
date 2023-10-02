@@ -1,0 +1,21 @@
+{
+  "name": "gallery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open"
+  },
+  "keywords": [],
+  "author": "ccencisoj",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.3.0"
+  },
+  "dependencies": {
+    "@firebase/rules-unit-testing": "^3.0.1",
+    "delay": "^6.0.0",
+    "firebase": "^10.4.0",
+    "firebase-admin": "^11.11.0"
+  }
+}

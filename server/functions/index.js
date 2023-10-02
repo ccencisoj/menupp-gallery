@@ -90,21 +90,25 @@ const handleRouteError = (req, res, error) => {
 
 app.post("/image", async (req, res) => {
   try {
+    // Get user from the request
     const user = await getUserFromRequest(req);
     if (user == null) {
       throw new AuthException("Auth required");
     }
 
+    // Get image as buffer from request
     const image = await getImageAsBufferFromRequest(req, "image");
     if (image == null) {
       throw new DataException("'image' field required");
     }
 
+    // Define path and data of the image
     const id = "image-" + Date.now();
     const name = `${id}.png`;
     const path = `users/${user.uid}/images/${name}`;
     const bucketRef = bucket.file(path);
 
+    // The image is processed and uploaded to storage
     sharp(image)
       .png()
       .resize({
@@ -122,16 +126,19 @@ app.post("/image", async (req, res) => {
 
 app.post("/profileImage", async (req, res) => {
   try {
+    // Get user from the request
     const user = await getUserFromRequest(req);
     if (user == null) {
       throw new AuthException("Auth required");
     }
 
+    // Get image as buffer from request
     const image = await getImageAsBufferFromRequest(req, "image");
     if (image == null) {
       throw new DataException("'image' field required");
     }
 
+    // The image is processed and uploaded to storage
     const bucketRef = bucket.file(`users/${user.uid}/profile/image.png`);
     sharp(image)
       .png()

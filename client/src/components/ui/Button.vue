@@ -23,6 +23,7 @@ const emits = defineEmits(["click"]);
     }"
     :type="props.type || 'button'"
     @click="emits('click', $event)"
+    v-bind="$attrs"
   >
     <q-spinner
       class="spinner"

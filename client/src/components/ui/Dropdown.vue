@@ -35,20 +35,20 @@ onMounted(() => {
   .content {
     right: 0px;
     position: absolute;
-    transition: all 200ms;
+    transition: all 100ms;
     top: calc(100% + 12px);
   }
 
   .content.hide {
     opacity: 0;
     visibility: hidden;
-    transform: scale(0.6) translate(100px, -50px);
+    transform: scale(0.9);
   }
 
   .content.show {
     opacity: 1;
     visibility: visible;
-    transform: scale(1) translate(0px, 0px);
+    transform: scale(1);
   }
 }
 </style>

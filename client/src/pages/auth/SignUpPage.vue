@@ -150,6 +150,7 @@ async function signUp() {
                 :error="form.touches.name ? form.errors.name : ''"
                 @blur="form.touches.name = true"
                 @input="form.values.name = $event.target.value"
+                data-test-id="input:name"
               />
               <FormTextField
                 label="Correo electronico"
@@ -157,6 +158,7 @@ async function signUp() {
                 :error="form.touches.email ? form.errors.email : ''"
                 @blur="form.touches.email = true"
                 @input="form.values.email = $event.target.value"
+                data-test-id="input:email"
               />
               <FormTextField
                 type="password"
@@ -165,6 +167,7 @@ async function signUp() {
                 :error="form.touches.password ? form.errors.password : ''"
                 @blur="form.touches.password = true"
                 @input="form.values.password = $event.target.value"
+                data-test-id="input:password"
               />
             </FieldGroup>
             <Divider />
@@ -173,6 +176,7 @@ async function signUp() {
               @click="
                 if (form.check().length === 0) currentStep = steps.UPLOAD_IMAGE;
               "
+              data-test-id="button:to-screen-2"
               >Continuar</Button
             >
           </section>
@@ -189,6 +193,7 @@ async function signUp() {
               :error="form.errors.profileImage"
               clipPath="circle(50.0% at 50% 50%)"
               @changeImages="profileImage = $event.images[0]"
+              data-test-id="input:profile-image"
             />
             <Divider />
             <ButtonGroup>
@@ -197,6 +202,7 @@ async function signUp() {
                 :show-loading="form.isSubmitting"
                 fullWidth
                 @click="signUp"
+                data-test-id="button:submit"
                 >Continuar</Button
               >
               <Button

@@ -81,7 +81,6 @@ function deleteImage(imageId) {
         />
         <img
           class="image"
-          k
           :class="{ expand: !props.clipPath }"
           :style="{
             clipPath: props.clipPath || 'none',
@@ -102,6 +101,7 @@ function deleteImage(imageId) {
     accept="image/*"
     :multiple="props.multiple"
     @change="changedFileInput"
+    v-bind="$attrs"
   />
 </template>
 

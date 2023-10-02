@@ -25,7 +25,7 @@ getStoredImages().then(
 );
 
 async function getStoredImages() {
-  const folder = storageRef(storage, `/users/${user.value.uid}/images`);
+  const folder = storageRef(storage, `users/${user.value.uid}/images`);
   const items = (await listAll(folder)).items;
 
   let images = [];
@@ -87,10 +87,11 @@ async function deleteImage(delImage) {
           :show-grid="false"
           label="Subir imagenes"
           @changeImages="onImageField"
+          data-test-id="input:select-images"
         />
       </header>
       <main class="main">
-        <div class="image-list">
+        <div class="image-list" data-test-id="container:image-list">
           <ImageCard
             v-for="image in images"
             :key="image.id"

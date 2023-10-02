@@ -90,6 +90,7 @@ function signInWithFacebook() {
               :error="form.touches.email ? form.errors.email : ''"
               @blur="form.touches.email = true"
               @input="form.values.email = $event.target.value"
+              data-test-id="input:email"
             />
             <FormTextField
               type="password"
@@ -98,6 +99,7 @@ function signInWithFacebook() {
               :error="form.touches.password ? form.errors.password : ''"
               @blur="form.touches.password = true"
               @input="form.values.password = $event.target.value"
+              data-test-id="input:password"
             />
           </FieldGroup>
           <FormSideLink
@@ -110,6 +112,7 @@ function signInWithFacebook() {
             :disabled="form.isSubmitting"
             :show-loading="form.isSubmitting"
             @click="signIn"
+            data-test-id="button:submit"
             >Continuar</Button
           >
         </q-form>

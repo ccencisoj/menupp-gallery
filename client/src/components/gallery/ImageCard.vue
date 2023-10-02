@@ -5,6 +5,7 @@ import MoreIcon from "components/icons/More.vue";
 import Button from "src/components/ui/Button.vue";
 import Dropdown from "src/components/ui/Dropdown.vue";
 import ButtonGroup from "src/components/ui/ButtonGroup.vue";
+import axios from "axios";
 
 const props = defineProps({
   image: Object,
@@ -15,8 +16,13 @@ const emits = defineEmits(["delete"]);
 const uploadingProgress = ref(100);
 const hrefDownload = ref(null);
 
-function downloadImage() {
-  hrefDownload.value.click();
+async function downloadImage() {
+  const elm = hrefDownload.value;
+  axios.get(props.image.src, { responseType: "blob" }).then((response) => {
+    elm.href = URL.createObjectURL(response.data);
+    elm.download = `${props.image?.id}.png`;
+    elm.click();
+  });
 }
 
 const showModal = ref(false);
@@ -59,12 +65,7 @@ onMounted(() => {
       <Close class="icon" />
     </button> -->
   </div>
-  <a
-    :href="props.image?.src"
-    :download="`${props.image?.id}.png`"
-    style="display: none"
-    ref="hrefDownload"
-  ></a>
+  <a style="display: none" ref="hrefDownload"></a>
   <div
     class="image-modal"
     :class="{ show: showModal, hide: !showModal }"
@@ -213,7 +214,6 @@ onMounted(() => {
         border-radius: 50%;
         align-items: center;
         justify-content: center;
-        border: 1px #360056 solid;
         background-color: #261d2d;
 
         .icon {
@@ -271,6 +271,11 @@ onMounted(() => {
         max-height: 80vh;
         max-width: 90vw;
       }
+
+      .dropdown {
+        top: 12px;
+        right: 12px;
+      }
     }
   }
 }
@@ -281,6 +286,11 @@ onMounted(() => {
       .image {
         max-height: 70vh;
         max-width: 100vw;
+      }
+
+      .dropdown {
+        top: 8px;
+        right: 4px;
       }
     }
   }
